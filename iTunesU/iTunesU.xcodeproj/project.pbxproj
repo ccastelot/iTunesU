@@ -489,6 +489,7 @@
 				CE0FE996186231B600860CB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE0FE997186231B600860CB9 /* Build configuration list for PBXNativeTarget "iTunesUTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +498,7 @@
 				CE0FE999186231B600860CB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
