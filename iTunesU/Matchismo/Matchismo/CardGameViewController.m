@@ -16,18 +16,23 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) int flipCount;
-@property (strong, nonatomic) Deck *cardDeck;
+@property (strong, nonatomic) Deck *deck;
 @end
 
 @implementation CardGameViewController
 
--(void)setCardDeck:(Deck *)cardDeck{
-    if (!cardDeck) {
-        _cardDeck = [[PlayingCardDeck alloc]init];
-        NSLog(@"Card Count: %d", [self.cardDeck.cards count]);
+-(Deck *)deck{
+    if (!_deck) {
+        _deck = [self createDeck];
     }
-    
+    return _deck;
 }
+    
+
+-(Deck *)createDeck {
+    return [[PlayingCardDeck alloc]init];
+}
+
 
 -(void)setFlipCount:(int)flipCount{
     _flipCount = flipCount;
@@ -36,28 +41,28 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-    self.flipCount++;
-    if(!_cardDeck){
-        [self setCardDeck:_cardDeck];
-    }
-    if ([self.cardDeck.cards count] > 0){
-        if([sender.currentTitle length]){
-            [sender setBackgroundImage:[UIImage imageNamed:@"backImage"]
-                              forState:UIControlStateNormal];
-            [sender setTitle:@""
-                    forState:UIControlStateNormal];
-        } else{
-            Card *card = [[self cardDeck] drawRandomCard];
+    
+    if([sender.currentTitle length]){
+        [sender setBackgroundImage:[UIImage imageNamed:@"backImage"]
+                          forState:UIControlStateNormal];
+        [sender setTitle:@""
+                forState:UIControlStateNormal];
+    } else{
+        Card *card = [[self deck] drawRandomCard];
+        if(card){
             [sender setBackgroundImage:[UIImage imageNamed:@"frontImage"]
                               forState:UIControlStateNormal];
             [sender setTitle:card.contents
                     forState:UIControlStateNormal];
         }
-        NSLog(@"\tCards Remain in Deck: %d", [self.cardDeck.cards count]);
+        else{
+            self.flipsLabel.text = [NSString stringWithFormat:@"No More Cards to Flip: %d", self.flipCount];
+        }
+        
     }
-    else{
-        self.flipsLabel.text = [NSString stringWithFormat:@"No More Cards to Flip: %d", self.flipCount];
-    }
+    NSLog(@"\tCards Remain in Deck: %d", self.deck.cards.count);
+    if(self.deck.cards.count)
+        self.flipCount++;
 }
 
 @end
