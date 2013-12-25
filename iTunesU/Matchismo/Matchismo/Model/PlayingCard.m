@@ -17,7 +17,7 @@
 @synthesize suit = _suit;
 
 +(NSArray *)validSuits{
-    return @[@"♣︎",@"♠︎",@"♥︎",@"♦︎"];
+    return @[@"♣︎",@"♠︎",@"♡",@"♢"];
 }
             
 
@@ -44,5 +44,23 @@
         _rank = rank;
     }
 }
+
+-(int)match:(NSArray *)otherCards
+{
+    int score = 0;
+    if([otherCards count] == 1){
+        PlayingCard *otherCard = [otherCards firstObject];
+        NSLog(@"@Card To Match: %@", otherCard.contents);
+        if(otherCard.rank == self.rank){
+            score = 4;
+        } else if ([otherCard.suit isEqualToString:self.suit]){
+            score = 1;
+        }
+        
+    }
+    
+    return score;
+}
+
 
 @end

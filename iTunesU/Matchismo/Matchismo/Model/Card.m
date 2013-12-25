@@ -17,9 +17,10 @@
 
 -(int)match:(NSArray *)otherCards
 {
-    int score = 0;
+    NSLog(@"%@",@"This is wrong.");
+   int score = 0;
     for(Card *card in otherCards){
-        if([card.contents isEqual:self.contents]){
+        if([card.contents isEqualToString:self.contents]){
             score = 1;
         }
     }
