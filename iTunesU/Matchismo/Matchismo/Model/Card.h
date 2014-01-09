@@ -15,6 +15,7 @@
 @property (nonatomic, getter = isChosen) BOOL chosen;
 @property (nonatomic, getter = isMatched) BOOL matched;
 @property (nonatomic, getter = hasBeenPlayed) BOOL played;
+@property (nonatomic, getter = isEliminated) BOOL eliminated;
 
 -(int)match:(NSArray *)otherCards;
 @end

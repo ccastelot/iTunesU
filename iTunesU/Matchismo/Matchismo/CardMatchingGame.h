@@ -20,4 +20,18 @@
 
 @property (nonatomic, readonly) NSInteger score;
 
+//-(void)resetPreviouslyChosenCards:(Card *)currentCard;
+
+//This is for determinining the number of cards to match
+typedef NS_ENUM(NSInteger, cardMatchMode) {
+    MatchTwo,
+    MatchThree
+};
+
+@property (nonatomic) cardMatchMode matchMode;
+
+-(void)resetCardsToMatch:(BOOL)reset;
+
+@property (nonatomic, strong, readonly) NSMutableString *matchResults;
+
 @end
